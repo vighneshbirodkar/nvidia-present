@@ -7,10 +7,10 @@
     <title>NVidia Presentation</title>
 
     <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/simple.css">
+    <link rel="stylesheet" href="css/theme/white.css">
 
     <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="lib/css/tomorrow.css">
 
     <!-- Printing and PDF exports -->
     <script>
@@ -30,15 +30,15 @@
 	</section>
 	<section>
 	  <img width="500px" src="images/minsky.jpg" />
-	  <h3> Marvin Minsky, Co-founder of MIT's AI Lab </h3>
-	  <h6>
+	  <h6> Marvin Minsky, Co-founder of MIT's AI Lab </h6>
+	  <p>
 	    <i>
 	      In the 60s, Marvin Minsky assigned a couple of undergrads to spend the summer programming a
 	      computer to use a camera to identify objects in a scene. He figured they'd have the problem
 	      solved by the end of the summer. Half a century later, we're still working on it.
 	    </i>
 	    [https://www.xkcd.com/1425/]
-	  </h6>
+	  </p>
 	</section>
 	<section>
 	  <h2> About Me </h2>
@@ -78,6 +78,7 @@
 	<section>
 	  <section>
 	    <h1> Region Adjacency Graphs (RAGs)</h1>
+	    <h3> For scikit-image</h3>
 	  </section>
 	  <section>
 	    <h2>Over-segmentation</h2>
@@ -105,12 +106,47 @@
 	    <video controls muted width="700px" src="images/hmerge_car.mp4"></video>
 	  </section>
 	  <section>
+	        <pre><code class="python">
+img = data.coffee()
+
+labels1 = segmentation.slic(img, compactness=30, n_segments=400)
+
+# Build graph
+g = graph.rag_mean_color(img, labels1, mode='similarity')
+
+# Process it
+labels2 = graph.cut_normalized(labels1, g)
+		
+    </code></pre>
+	  </section>
+	  <section>
 	    <ul>
 	      <li> Peer-review vastly improved code quality. </li>
 	      <li> Specially for open-source projects, presentation of your work matters a lot. </li>
 	      <li> APIs should be easy to use and extensible. The <b>graph</b> API now supports
 		3 different graph types and 4 different segmentation algorithms. </li>
 	    </ul>
+	  </section>
+	</section>
+	<section>
+	  <section>
+	    <h1> Other Contributions</h1>
+	  </section>
+	  <section>
+	    Blob Detection
+	    <img  src="images/blobs.png"/>
+	  </section>
+	  <section>
+	    <p>Seam Carving</p>
+	    <img  src="images/seam_img.png"/>
+	  </section>
+	  <section>
+	    <p>Seam Carving - cond.</p>
+	    <img width="500px" src="images/seam_resized.png"/>
+	  </section>
+	  <section>
+	    <p>Seam Carving - cond.</p>
+	    <img width="500px" src="images/seam_carved.png"/>
 	  </section>
 	</section>
       </div>
