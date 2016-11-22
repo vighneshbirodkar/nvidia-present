@@ -70,7 +70,7 @@
 	  <section>
 	    <ul>
 	      <li> Debugging robots can be tricky and fun. </li>
-	      <li> If the visual environemt is well-defined, it can be exploited to
+	      <li> If the visual environment is well-defined, it can be exploited to
 		write simple and efficient image-processing code. </li>
 	    </ul>
 	  </section>
@@ -102,7 +102,7 @@
 	    <video controls muted width="700px" src="images/ncut_car.mp4"></video>
 	  </section>
 	  <section>
-	    Hierarchiccal Merging in action
+	    Hierarchical Merging in action
 	    <video controls muted width="700px" src="images/hmerge_car.mp4"></video>
 	  </section>
 	  <section>
@@ -134,19 +134,19 @@ labels2 = graph.cut_normalized(labels1, g)
 	  </section>
 	  <section>
 	    Blob Detection
-	    <img  src="images/blobs.png"/>
+	    <img style="border:none; box-shadow:none" src="images/blobs.png"/>
 	  </section>
 	  <section>
 	    <p>Seam Carving</p>
-	    <img  src="images/seam_img.png"/>
+	    <img  style="border:none; box-shadow:none" src="images/seam_img.png"/>
 	  </section>
 	  <section>
-	    <p>Seam Carving - cond.</p>
-	    <img width="500px" src="images/seam_resized.png"/>
+	    <p>Seam Carving </p>
+	    <img width="500px" style="border:none; box-shadow:none" src="images/seam_resized.png"/>
 	  </section>
 	  <section>
-	    <p>Seam Carving - cond.</p>
-	    <img width="500px" src="images/seam_carved.png"/>
+	    <p>Seam Carving</p>
+	    <img width="500px" style="border:none; box-shadow:none" src="images/seam_carved.png"/>
 	  </section>
 	</section>
 	<section>
@@ -185,12 +185,120 @@ labels2 = graph.cut_normalized(labels1, g)
 	  </section>
 	  <section>
 	    <ul>
-	      <li>Helped me gain a better understandng of Fourier domain analysis. It is often talked about
+	      <li>Helped me gain a better understanding of Fourier domain analysis. It is often talked about
 	      in academia but I never had hands on experience with it.</li>
 	      <li>Publishing your own code makes you think about things you had never thought of before.</li>
 	      <li>Good architecture choices early on can save hours of work later in development. </li>
 	    </ul>
 	  </section>
+	</section>
+	<section>
+	  <section>
+	    <h2>Contributions to scikit-learn</h2>
+	    <h6>as Junior Data Scientist at NYU</h6>
+	  </section>
+	  <section>
+	    Early stopping of Gradient Boosting with CV
+	    <img src="images/gbcv.png" />
+	  </section>
+	  <section>
+	    <h3>Robust PCA</h3>
+	    $$
+	    \text{minimize}~~~ \Vert L \Vert_* + \lambda \Vert S \Vert_1\\
+	    \text{subject to}~~~ M = L + S
+	    $$
+	  </section>
+	  <section>
+	    <h4>RPCA - Background subtraction</h4>
+	    <img width="700px" style="border:none; box-shadow:none" src="images/rpca_img.png" />
+	  </section>
+	  <section>
+	    <h4>RPCA - Background subtraction</h4>
+	    <img width="700px" style="border:none; box-shadow:none" src="images/rpca_fg.png" />
+	  </section>
+	  <section>
+	    <h4>RPCA - Background subtraction</h4>
+	    <img width="700px" style="border:none; box-shadow:none" src="images/rpca_bg.png" />
+	  </section>
+	  <section>
+	    <h3>scikit-learn extension template</h3>
+	    <p>http://contrib.scikit-learn.org/project-template/ </p>
+	    <ul>
+	      <li>A template for writing scikit-learn compatible extensions.</li>
+	      <li>Already used by 7 other projects.</li>
+	    </ul>
+	  </section>
+	  <section>
+	    <ul>
+	      <li>Stating a task in terms of a convex objective has surprising benefits.</li>
+	      <li>The larger the project, the more crucial is backward compatibility.</li>
+	    </ul>
+	  </section>
+	</section>
+	<section>
+	  <section>
+	    <h3>Summer internship</h3>
+	    <ul>
+	      <li> DeepMagic, NYC based early stage startup.</li>
+	      <li> Trained ConvNets for image classification.</li>
+	      <li> Responsible for augmenting images and creating dataset.</li>
+	      <li> Deployed the service as a WebAPI.</li>
+	    </ul>
+	  </section>
+	  <section>
+	    <ul>
+	      <li> ConvNets are extremely sensitive to quirks in training data.</li>
+	      <li> Transfer learning improves accuracy on small datasets and saves lot of training time.</li>
+	      <li> Any invariance (scale, rotation, illumination) you expect the network to learn, should
+	      be present in the training data.</li>
+	    </ul>
+	  </section>
+	</section>
+	<section>
+	  <section>
+	    <h3>Research Assistantship</h3>
+	    <ul>
+	      <li> Encode and Decode unlabelled videos frames.</li>
+	      <li> Make the encodings linear through time.</li>
+	    </ul>
+	  </section>
+	  <section>
+	    <img style="border:none" width="800px" src="images/emb.png" />
+	  </section>
+	  <section>
+	    <h3>Strategies</h3>
+	    <ul>
+	      <li> Adversarial Loss</li>
+	      <li> Explicit penalty</li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h6>No penalty</h6>
+	    <img width="500px" src="images/demo/output_normal/output005.png" />
+	    <h6>Cosine distance penalty</h6>
+	    <img width="500px" src="images/demo/output_cosine/output005.png" />
+	  </section>
+	  <section>
+	    <h6>No penalty</h6>
+	    <img width="500px" src="images/demo/output_normal/output045.png" />
+	    <h6>Cosine distance penalty</h6>
+	    <img width="500px" src="images/demo/output_cosine/output045.png" />
+	  </section>
+	  <section>
+	    <h6>No penalty</h6>
+	    <img width="500px" src="images/demo/output_normal/output092.png" />
+	    <h6>Cosine distance penalty</h6>
+	    <img width="500px" src="images/demo/output_cosine/output092.png" />
+	  </section>
+	  <section>
+	    <h6>No penalty</h6>
+	    <img width="500px" src="images/demo/output_normal/output099.png" />
+	    <h6>Cosine distance penalty</h6>
+	    <img width="500px" src="images/demo/output_cosine/output099.png" />
+	  </section>
+	</section>
+	<section>
+	  <h2> Thank You </h2>
 	</section>
       </div>
     </div>
@@ -205,6 +313,7 @@ labels2 = graph.cut_normalized(labels1, g)
 
       // More info https://github.com/hakimel/reveal.js#dependencies
       dependencies: [
+      { src: 'plugin/math/math.js', async: true },
       { src: 'plugin/markdown/marked.js' },
       { src: 'plugin/markdown/markdown.js' },
       { src: 'plugin/notes/notes.js', async: true },
