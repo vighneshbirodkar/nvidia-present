@@ -102,112 +102,259 @@
 	    <h2>Memory Usage</h2>
 	    <img width="800px" src="images/rag_mem.png" />
 	  </section>
-	</section>
-	<section>
 	  <section>
-	    <img width="400px" style="border:none; box-shadow:none" src="images/fredo_logo.png" />
-	    <p>http://fredo-editor.github.io/ </p>
-	  </section>
-	  <section>
-	    <h2>Fourier Transform in 1D</h2>
-	    <video controls muted width="700px" src="images/fft.webm"></video>
-	    <p>Video from Wikipedia</p>
-	  </section>
-	  <section>
-	    <h2>Fourier Transform in images</h2>
-	    <img width="800px" src="images/asto_fft.png" />
-	  </section>
-	  <section>
-	    <h3>Example 1</h3>
-	    <img  width="1200px" src="images/ex1_in.jpg" />
-	  </section>
-	  <section>
-	    <h3>Example 1 - Corrected</h3>
-	    <img  width="1200px" src="images/ex1_out.jpg" />
-	  </section>
-	  <section>
-	    <h3>Example 2</h3>
-	    <img  width="1200px" src="images/ex2_in.png" />
-	  </section>
-	  <section>
-	    <h3>Example 2 - Corrected</h3>
-	    <img  width="1200px" src="images/ex2_out.png" />
-	  </section>
-	  <section>
-	    <h3>In Action</h3>
-	    <video controls muted width="1000px" src="images/record.ogv"></video>
-	  </section>
-	  <section>
+	    <h2>Conclusion</h2>
 	    <ul>
-	      <li>Helped me gain a better understanding of Fourier domain analysis. It is often talked about
-	      in academia but I never had hands on experience with it.</li>
-	      <li>Publishing your own code makes you think about things you had never thought of before.</li>
-	      <li>Good architecture choices early on can save hours of work later in development. </li>
+	      <li>Finalized using networkx library.</li>
+	      <li>Would allow using their existing graph manipulation routines.</li>
+	      <li>Pure python, hence no problem having it as a dependency.</li>
+	      <li>Created the <b>RAG</b> class inside <b>skimage</b> which inherits
+		from <b>networkx.Graph</b>
 	    </ul>
 	  </section>
-	</section>
-	<section>
 	  <section>
-	    <h2>Contributions to scikit-learn</h2>
-	    <h6>as Junior Data Scientist at NYU</h6>
+	    <h2>Example - Input Image</h2>
+	    <img width="800px" src="images/car.jpg" />
 	  </section>
 	  <section>
-	    Early stopping of Gradient Boosting with CV
-	    <img src="images/gbcv.png" />
+	    <h2>Example - Initial Segmentation</h2>
+	    <img width="800px" src="images/car_slic.png" />
 	  </section>
 	  <section>
-	    <h3>Robust PCA</h3>
+	    <h2>Code - Contruction</h2>
+    <pre><code data-trim data-noescape class="python">
+img = io.imread('car.jpg')
+labels = segmentation.slic(img, compactness=30, n_segments=400)
+g = graph.rag_mean_color(img, labels)
+
+out = graph.draw_rag(labels, g, img)
+    </code></pre>
+	  </section>
+	  <section>
+	    <h2>Example - RAG</h2>
+	    <img width="800px" src="images/car_rag.png" />
+	  </section>
+	  <section>
+	    <h2> Example - Thresholding </h2>
+    <pre><code data-trim data-noescape class="python">
+labels_new = graph.cut_threshold(labels, g, 30)
+
+    </code></pre>
+    <img width="800px" src="images/car_thresh.png" />
+	  </section>
+	  <section>
+	    <h2> Images and graph cut </h2>
+	    <ul>
+	      <li>If similar regions have high edge weights, it seems natural that
+		a minimum cut remove low weight edges preserve regions.</li>
+	      <li> However </li>
+	    </ul>
+	     <img width="500px" src="images/min_cut.jpg" />
+	  </section>
+	  <section>
+	    <h2> Normalized Cut </h2>
+	    For a graph V.
 	    $$
-	    \text{minimize}~~~ \Vert L \Vert_* + \lambda \Vert S \Vert_1\\
-	    \text{subject to}~~~ M = L + S
+	    \ \\
+	    NCut(A, B) = \frac{cut(A, B)}{Assoc(A, V)} + \frac{cut(A, B)}{Assoc(B, V)}\\
+	    cut(A, B) = \sum\limits_{a \in A, b \in B} w(a, b)\\
+	    Assoc(X, V) = \sum\limits_{x \in X, v\in V } w(x, v) 
 	    $$
 	  </section>
 	  <section>
-	    <h4>RPCA - Background subtraction</h4>
-	    <img width="700px" style="border:none; box-shadow:none" src="images/rpca_img.png" />
+	    <h2>Normalized Cut</h2>
+	    <img width="500px" src="images/ncut.jpg" />
 	  </section>
 	  <section>
-	    <h4>RPCA - Background subtraction</h4>
-	    <img width="700px" style="border:none; box-shadow:none" src="images/rpca_fg.png" />
+	    <h2> Example - NCut </h2>
+<pre><code data-trim data-noescape class="python">
+graph.rag_mean_color(img, labels, mode='similarity')		
+labels_new = graph.cut_normalized(labels, g)
+    </code></pre>
+<img width="800px" src="images/car_ncut.png" />
 	  </section>
 	  <section>
-	    <h4>RPCA - Background subtraction</h4>
-	    <img width="700px" style="border:none; box-shadow:none" src="images/rpca_bg.png" />
+	    <h2>NCut - Video</h2>
+	    <video controls>
+	      <source src="images/ncut_car.mp4" type="video/mp4">
+	    </video>
 	  </section>
 	  <section>
-	    <h3>scikit-learn extension template</h3>
-	    <p>http://contrib.scikit-learn.org/project-template/ </p>
+	    <h2>NCut - Image</h2>
+	    <img width="800px" src="images/fruit.jpg" />
+	  </section>
+	  <section>
+	    <h2>NCut - Video</h2>
+	    <video controls>
+	      <source src="images/fruit.webm" type="video/webm">
+	    </video>
+	  </section>
+	  <section>
+	    <h2>Hierarchical Merging</h2>
 	    <ul>
-	      <li>A template for writing scikit-learn compatible extensions.</li>
-	      <li>Already used by 7 other projects.</li>
+	      <li> 
+	      Repeatedly group similar adjacent regions until there
+	      are no adjacent regions which are similar enough.
+	      </li>
+	      <li>
+		Implemented in scikit-image via 2 callbacks.
+	      </li>
 	    </ul>
 	  </section>
 	  <section>
+	    <h2> Weight callback </h2>
+<pre><code data-trim data-noescape class="python">
+def _weight_mean_color(graph, src, dst, n):
+    """Callback to handle merging nodes by recomputing mean color.
+
+    The method expects that the mean color of `dst` is already computed.
+
+    Parameters
+    ----------
+    graph : RAG
+        The graph under consideration.
+    src, dst : int
+        The vertices in `graph` to be merged.
+    n : int
+        A neighbor of `src` or `dst` or both.
+
+    Returns
+    -------
+    data : dict
+        A dictionary with the `"weight"` attribute set as the absolute
+        difference of the mean color between node `dst` and `n`.
+    """
+
+    diff = graph.node[dst]['mean color'] - graph.node[n]['mean color']
+    diff = np.linalg.norm(diff)
+    return {'weight': diff}
+</code> </pre>
+	  </section>
+	  <section>
+	    <h2>Merge callback</h2>
+<pre><code data-trim data-noescape class="python">
+def merge_mean_color(graph, src, dst):
+    """Callback called before merging two nodes of a mean color distance graph.
+
+    This method computes the mean color of `dst`.
+
+    Parameters
+    ----------
+    graph : RAG
+        The graph under consideration.
+    src, dst : int
+        The vertices in `graph` to be merged.
+    """
+    graph.node[dst]['total color'] += graph.node[src]['total color']
+    graph.node[dst]['pixel count'] += graph.node[src]['pixel count']
+    graph.node[dst]['mean color'] = (graph.node[dst]['total color'] /
+</code> </pre>
+	  </section>
+	  <section>
+	    <h3> Example - Hierarchical Merging </h3>
+<pre><code data-trim data-noescape class="python">
+labels_new = graph.merge_hierarchical(labels, g, thresh=35, rag_copy=False,
+                                   in_place_merge=True, merge_func=merge_mean_color,
+                                   weight_func=_weight_mean_color)
+</code> </pre>
+            <img width="800px" src="images/car_merge.png" />
+	  </section>
+	  <section>
+	    <h2>Hierarchical Merging - Video</h2>
+	    <video controls>
+	      <source src="images/car_merge.webm" type="video/webm">
+	    </video>
+	  </section>
+	  <section>
+	    <h2>Region Boundary RAGs</h2>
 	    <ul>
-	      <li>Stating a task in terms of a convex objective has surprising benefits.</li>
-	      <li>The larger the project, the more crucial is backward compatibility.</li>
+	      <li> Use an energy map from the user, typically an edge map </li>
+	      <li> The edge weight between 2 regions is the average value of the
+	      energy map along their shared boundary.</li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Example - Region Boundary RAG</h2>
+<pre><code data-trim data-noescape class="python">
+edges = filters.sobel(gray_img)
+g = graph.rag_boundary(labels, edges)
+</code> </pre>
+            <img width="800px" src="images/rag_boundary.png" />
+	  </section>
+	  <section>
+	    <h2>Region Boundary RAG callbacks</h2>
+<pre><code data-trim data-noescape class="python">
+def weight_boundary(graph, src, dst, n):
+    """
+    Handle merging of nodes of a region boundary region adjacency graph.
+
+    This function computes the `"weight"` and the count `"count"`
+    attributes of the edge between `n` and the node formed after
+    merging `src` and `dst`.
+
+
+    Parameters
+    ----------
+    graph : RAG
+        The graph under consideration.
+    src, dst : int
+        The vertices in `graph` to be merged.
+    n : int
+        A neighbor of `src` or `dst` or both.
+
+    Returns
+    -------
+    data : dict
+        A dictionary with the "weight" and "count" attributes to be
+        assigned for the merged node.
+
+    """
+    default = {'weight': 0.0, 'count': 0}
+
+    count_src = graph[src].get(n, default)['count']
+    count_dst = graph[dst].get(n, default)['count']
+
+    weight_src = graph[src].get(n, default)['weight']
+    weight_dst = graph[dst].get(n, default)['weight']
+
+    count = count_src + count_dst
+    return {
+        'count': count,
+        'weight': (count_src * weight_src + count_dst * weight_dst)/count
+    }
+
+
+def merge_boundary(graph, src, dst):
+    """Call back called before merging 2 nodes.
+
+    In this case we don't need to do any computation here.
+    """
+    pass
+</code> </pre>
+	  </section>
+	  <section>
+	    <h2>Example - Boundary Merge</h2>
+<pre><code data-trim data-noescape class="python">
+labels2 = graph.merge_hierarchical(labels, g, thresh=0.1, rag_copy=False,
+                                   in_place_merge=True, merge_func=merge_boundary,
+                                   weight_func=weight_boundary)
+</code> </pre>
+             <img width="800px" src="images/car_boundary_merge.png" />
+	  </section>
+	  <section>
+	    <h2>Summary</h2>
+	    <ul>
+	      <li><b>skimage.future.graph</b> provides APIs to construct and manimulate
+		n-dimensional region adjacency graphs.</li>
+	      <li>Well documented and hackable.</li>
+	      <li>Useful for pre-processing while training ConvNets.</li>
+	      <li>More details about my summer project
+		<a href="https://vcansimplify.wordpress.com/tag/gsoc/" > On my blog</a>
+	      </li>
 	    </ul>
 	  </section>
 	</section>
-	<section>
-	  <section>
-	    <h3>Summer internship</h3>
-	    <ul>
-	      <li> DeepMagic, NYC based early stage startup.</li>
-	      <li> Trained ConvNets for image classification.</li>
-	      <li> Responsible for augmenting images and creating dataset.</li>
-	      <li> Deployed the service as a WebAPI.</li>
-	    </ul>
-	  </section>
-	  <section>
-	    <ul>
-	      <li> ConvNets are extremely sensitive to quirks in training data.</li>
-	      <li> Transfer learning improves accuracy on small datasets and saves lot of training time.</li>
-	      <li> Any invariance (scale, rotation, illumination) you expect the network to learn, should
-	      be present in the training data.</li>
-	    </ul>
-	  </section>
-	</section>
+	
 	<section>
 	  <section>
 	    <h3>Research Assistantship</h3>
