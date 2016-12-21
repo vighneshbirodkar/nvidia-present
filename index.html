@@ -357,21 +357,65 @@ labels2 = graph.merge_hierarchical(labels, g, thresh=0.1, rag_copy=False,
 	
 	<section>
 	  <section>
-	    <h3>Research Assistantship</h3>
+	    <h2>Unsupervised learning in videos</h2>
+	    <p>Research Assistantship during Fall 2016 with Prof. Davi Geiger.</p>
+	    <p style="color:#ff0000" >[Work in progress]</p>
+	  </section>
+	  <section>
+	    <h2>Our understanding of motion.</h2>
 	    <ul>
-	      <li> Encode and Decode unlabelled videos frames.</li>
-	      <li> Make the encodings linear through time.</li>
+	      <li>Humans understand motion really well.</li>
+	      <li>We are able to anticipate motion, infer trajectories and react
+		to motion very quickly.</li>
+	      <li>Most of our learning about motion comes in an unsupervised setting.</li>
+	      <li>We think that humans are able to map motion to a linear space to be able
+	      to interpolate and extrapolate so well.</li>
+	    </ul>
+	  </section>
+	  <section>
+	    <h2>Compression</h2>
+	    Knowledge about the domain is extremely essential for good compression.
+	    
+	    <p>
+	    Rather than specifying 640 x 480 pixels, humans would describe the picture
+	    as "Red Ford GT sports car with yellow stripes parked on a road with trees
+	    in the background."</p>
+	    <img width="400px" src="images/redcar.jpg" />
+	  </section>
+	  <section>
+	    <h2>Autoencoders</h2>
+	    Given input image $X$, Encoder $E$ and Decoder $D$, we have
+	    $$
+	    z = E(X)\\
+	    D(z) \approx X
+	    $$
+	    Typically $size(z) << size(X)$. If the model is able to
+	successfully achieve its objective, it would have gained some
+	knowledge about the domain, specifically images.
+	</section>
+	  <section>
+	    <h2>Our approach</h2>
+	    <ul>
+	      <li> Encode and decode frames trough time minimizing
+		reconstruction error. </li>
+	      <li>Force the latent vectors of frames to be linear through.</li>
+	      <li>One way to encourage linearity is cosine distance.</li>
 	    </ul>
 	  </section>
 	  <section>
 	    <img style="border:none" width="800px" src="images/emb.png" />
 	  </section>
 	  <section>
-	    <h3>Strategies</h3>
-	    <ul>
-	      <li> Adversarial Loss</li>
-	      <li> Explicit penalty</li>
-	    </ul>
+	    <h2>Cost function</h2>
+	    Given sequence of frames $X_1, X_2, \ldots X_n$
+	    $$
+	    \mathcal{L} = \sum\limits_{i=1}^N \lVert D(E(X_i)) - X_i \rVert_2^2
+	    - \sum\limits_{i=2}^{n-1} d_{\mathrm{cosine}}\mid (X_i - X_1, X_n - X_1) \mid\\
+	    d_{\mathrm{cosine}}(a, b) = \frac{a \cdot b}{\lVert a\rVert_2 \lVert b\rVert_2}
+	    $$
+	  </section>
+	  <section>
+	    <h1>Results so far</h1> 
 	  </section>
 	  <section>
 	    <h6>No penalty</h6>
@@ -396,6 +440,15 @@ labels2 = graph.merge_hierarchical(labels, g, thresh=0.1, rag_copy=False,
 	    <img width="500px" src="images/demo/output_normal/output099.png" />
 	    <h6>Cosine distance penalty</h6>
 	    <img width="500px" src="images/demo/output_cosine/output099.png" />
+	  </section>
+	  <section>
+	    <h2>Possible improvements</h2>
+	    <ul>
+	      <li>MSE leads to blurry predictions in multi-modal distributions.
+	      An adversarial penalty could be used to address this.</li>
+	      <li>The assumption fails when there is a change of scene in a video.
+	      Possibly avoid by pre-processing.</li>
+	    </ul>
 	  </section>
 	</section>
 	<section>
