@@ -121,7 +121,7 @@
 	    <img width="800px" src="images/car_slic.png" />
 	  </section>
 	  <section>
-	    <h2>Code - Contruction</h2>
+	    <h2>Code - Construction</h2>
     <pre><code data-trim data-noescape class="python">
 img = io.imread('car.jpg')
 labels = segmentation.slic(img, compactness=30, n_segments=400)
@@ -146,7 +146,7 @@ labels_new = graph.cut_threshold(labels, g, 30)
 	    <h2> Images and graph cut </h2>
 	    <ul>
 	      <li>If similar regions have high edge weights, it seems natural that
-		a minimum cut remove low weight edges preserve regions.</li>
+		a minimum cut remove low weight edges and preserve region-wise connectivity.</li>
 	      <li> However </li>
 	    </ul>
 	     <img width="500px" src="images/min_cut.jpg" />
@@ -168,7 +168,7 @@ labels_new = graph.cut_threshold(labels, g, 30)
 	  <section>
 	    <h2> Example - NCut </h2>
 <pre><code data-trim data-noescape class="python">
-graph.rag_mean_color(img, labels, mode='similarity')		
+g = graph.rag_mean_color(img, labels, mode='similarity')		
 labels_new = graph.cut_normalized(labels, g)
     </code></pre>
 <img width="800px" src="images/car_ncut.png" />
@@ -398,7 +398,7 @@ labels2 = graph.merge_hierarchical(labels, g, thresh=0.1, rag_copy=False,
 	    <ul>
 	      <li> Encode and decode frames trough time minimizing
 		reconstruction error. </li>
-	      <li>Force the latent vectors of frames to be linear through.</li>
+	      <li>Force the latent vectors of frames to be linear through time.</li>
 	      <li>One way to encourage linearity is cosine distance.</li>
 	    </ul>
 	  </section>
